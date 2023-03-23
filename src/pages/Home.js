@@ -1,5 +1,4 @@
 import Stack from 'react-bootstrap/Stack';
-import { Container } from "react-bootstrap";
 import BudgetModal from "../components/modalBudget";
 import BudgetCard from "../components/budgetCard";
 import { useContext } from "react";
@@ -13,7 +12,6 @@ const {expenses} = useContext(BudgetContext)
 
     return ( 
         <>
-          <Container className="mt-4">
           <Stack direction="horizontal" gap={2} >
             <h1 className="me-auto">Your Budgets</h1>
             <span className="me-2"><BudgetModal /></span>
@@ -31,7 +29,6 @@ const {expenses} = useContext(BudgetContext)
             }                  
    
           </div>
-        </Container>
         </>
      );
 }
