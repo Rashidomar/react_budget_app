@@ -1,34 +1,16 @@
-import Stack from 'react-bootstrap/Stack';
-import BudgetModal from "../components/modalBudget";
-import BudgetCard from "../components/budgetCard";
-import { useContext } from "react";
-import { BudgetContext } from '../contexts/budgetContext';
 
-const Home = () => { 
-const {budgets} = useContext(BudgetContext)
-const {expenses} = useContext(BudgetContext)
-
-
-
+const Home = () => {
     return ( 
         <>
-          <Stack direction="horizontal" gap={2} >
-            <h1 className="me-auto">Your Budgets</h1>
-            <span className="me-2"><BudgetModal /></span>
-          </Stack>
-          <div className="d-flex flex-wrap">
-            {budgets && budgets.map((budget)=>{
-              const allBudgetExpenses = expenses.filter((expense)=>(
-                expense.budgetId === budget.budgetId
-              ))
-              const amount = allBudgetExpenses.reduce((total, expense)=>(total + expense.amount), 0)
-              return (
-                <BudgetCard budget={budget} amount={amount}/>
-                ) 
-             })
-            }                  
-   
-          </div>
+        <div style={{ height: '800px' }} className="cover-container text-center d-flex w-100 p-3 mx-auto flex-column ">
+            <main class="px-3">
+                <h1>Cover your page.</h1>
+                <p className="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+                <p className="lead">
+                {/* <a href="" className="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn more</a> */}
+                </p>
+            </main>
+        </div>
         </>
      );
 }

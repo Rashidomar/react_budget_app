@@ -35,7 +35,6 @@ const BudgetCard = ({budget, amount}) => {
                             <ProgressBar animated variant={getProgress(amount, budget.maxAmount)} now={amount} max={budget.maxAmount} min={0} />
                         </Card.Text>
                     <div className="d-flex justify-content-end mt-4">
-                        {console.log(budget.budgetId)}
                         <div className="m-2"><ExpenseModal budgetId={budget.budgetId}/></div>
                         <div className="m-2"><ViewExpenses budgetId={budget.budgetId}/></div>
                     </div>

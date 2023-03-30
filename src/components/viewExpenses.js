@@ -32,7 +32,7 @@ const ViewExpenses = ({budgetId}) => {
               <Modal.Body>
                 {
                   allExpenses.map((expense)=>(
-                    <Stack direction="horizontal" gap={2} >
+                    <Stack key={expense.expenseId} direction="horizontal" gap={2} >
                       <span className="me-auto">{expense.description}</span>
                       <span className="me-2">{expense.amount}</span>
                       <Button size='sm' onClick={()=>{
