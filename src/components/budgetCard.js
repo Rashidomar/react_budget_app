@@ -3,16 +3,10 @@ import ExpenseModal from "./modaLExpense";
 import ViewExpenses from "./viewExpenses";
 import { BudgetContext } from "../contexts/budgetContext";
 import { useContext } from "react";
+import {getcurrentFormat, getProgress} from "../utils/helpers";
+
 
 const BudgetCard = ({budget, amount}) => {
-
-    function getProgress (amount, max){
-        const percent = parseInt((amount / max) * 100 )
-        if (percent >= 0 &&  percent <= 50) return "primary"
-        if (percent >= 51 && percent <= 75) return "warning"
-        if (percent >= 76) return "danger"
-
-    }
 
     const {budgets, setBudget} = useContext(BudgetContext)
     
@@ -29,7 +23,7 @@ const BudgetCard = ({budget, amount}) => {
                 <Card.Body>
                     <div className="d-flex">
                         <Card.Title className="me-auto">{budget.name}</Card.Title>
-                        <span className="me-2"> {`${amount}/${budget.maxAmount}`} </span>
+                        <span className="me-2"> {`${getcurrentFormat(amount, budget.currency )}/${getcurrentFormat(budget.maxAmount, budget.currency)}`} </span>
                     </div>
                         <Card.Text className="mb-6">
                             <ProgressBar animated variant={getProgress(amount, budget.maxAmount)} now={amount} max={budget.maxAmount} min={0} />
@@ -39,8 +33,7 @@ const BudgetCard = ({budget, amount}) => {
                         <div className="m-2"><ViewExpenses budgetId={budget.budgetId}/></div>
                     </div>
                 </Card.Body>
-            </Card>
-            
+            </Card>    
         </>
      );
 }

@@ -15,17 +15,16 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const {budgets,expenses} = useContext(BudgetContext)
     const { checkTokenState } = useVerifyToken()
-    const {setAuth} = useLocalStoral()
+    const {setAuth , getAuth} = useLocalStoral()
 
     useEffect(() => {
-      checkTokenState().then(data=>{
-       setAuth(data.auth)
-        if (!data.auth) {
-          navigate("/login");
-          window.location.reload();
-      }
-    },[])
-    
+        checkTokenState().then(data=>{
+           if (!data.auth) {
+             navigate("/login");
+             window.location.reload();
+         }
+         setAuth(getAuth)
+       },[])
       });
 
     return ( 
@@ -45,7 +44,6 @@ const Dashboard = () => {
                 ) 
              })
             }                  
-   
           </div>
         </>
      );

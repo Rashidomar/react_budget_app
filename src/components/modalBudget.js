@@ -9,6 +9,7 @@ const BudgetModal = () => {
     const {budgets, setBudget} = useContext(BudgetContext)
     const nameRef = useRef()
     const amountRef = useRef()
+    const currencyRef = useRef()
 
     const [show, setShow] = useState(false);
 
@@ -19,8 +20,10 @@ const BudgetModal = () => {
       e.preventDefault()
       const name =  nameRef.current.value
       const amount = parseInt(amountRef.current.value) 
+      const currency = currencyRef.current.value
       const id = uuid()
-      setBudget([...budgets, {budgetId:id, name:name, maxAmount:amount}])
+      console.log(currency)
+      setBudget([...budgets, {budgetId:id, name:name, maxAmount:amount, currency:currency}])
       handleClose()
     };
 
@@ -36,6 +39,15 @@ const BudgetModal = () => {
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="text" ref={nameRef} placeholder="Enter the name of your budget" required autoFocus />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Label>Currency</Form.Label>
+                    <Form.Select ref={currencyRef} aria-label="Default select example">
+                      <option>Please select your currency</option>
+                      <option value="USD">Dollar</option>
+                      <option value="EUR">Euro</option>
+                      <option value="GBP">Pounds</option>
+                    </Form.Select>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Max Amount</Form.Label>
