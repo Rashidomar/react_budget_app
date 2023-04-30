@@ -6,6 +6,7 @@ import { BudgetContext } from '../contexts/budgetContext';
 import { v4 as uuid} from 'uuid';
 
 const BudgetModal = () => {
+  const [validated, setValidated] = useState(false);
     const {budgets, setBudget} = useContext(BudgetContext)
     const nameRef = useRef()
     const amountRef = useRef()
@@ -17,12 +18,17 @@ const BudgetModal = () => {
     const handleShow = () => setShow(true);
 
     const handleBudget = (e) => {
-      e.preventDefault()
+ 
+      const form = e.currentTarget;
+      if (form.checkValidity() === false) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      setValidated(true);
       const name =  nameRef.current.value
       const amount = parseInt(amountRef.current.value) 
       const currency = currencyRef.current.value
       const id = uuid()
-      console.log(currency)
       setBudget([...budgets, {budgetId:id, name:name, maxAmount:amount, currency:currency}])
       handleClose()
     };
@@ -35,7 +41,7 @@ const BudgetModal = () => {
                 <Modal.Title>Add Budget</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <Form>
+                <Form noValidate validated={validated} >
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="text" ref={nameRef} placeholder="Enter the name of your budget" required autoFocus />
