@@ -20,10 +20,14 @@ const Login = () => {
     
     const handleLogin = (e)=>{
         const form = e.currentTarget;
+        console.log(form.checkValidity())
         if (form.checkValidity() === false) {
           e.preventDefault();
           e.stopPropagation();
+          setValidated(true);
+
         }else{
+            e.preventDefault();
 
             const email = emailRef.current.value
             const password = passwordRef.current.value
@@ -48,11 +52,7 @@ const Login = () => {
                 }
     
             })
-    
         }
-        setValidated(true);
-
-        
 
     }
     return ( 
