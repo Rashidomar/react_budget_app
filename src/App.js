@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import Home from "./pages/Home";
+import NavBar from "./components/navbar";
+import { Container } from "react-bootstrap";
+import BudgetContextProvider from "./contexts/budgetContext";
+import { Routes, Route} from "react-router-dom";
+import Login from "./pages/Login";
+import Signup from "./pages/Sigup";
+import Dashboard from "./pages/Dashboard";
+// import UserContextProvider from "./contexts/userContent";
+// import ProtectedRoutes from "./utils/protecedRoutes";
+// import { useContext, useState, useEffect } from "react";
+// import { UserContext } from "./contexts/userContent";
+// import ProtectDasboard from "./utils/protecedRoutes";
+
 
 function App() {
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* <UserContextProvider> */}
+        <BudgetContextProvider>
+            <NavBar />
+              <Container className="mt-4">
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    {/* <Route path="/dashboard" element={<ProtectDasboard><Dashboard /></ProtectDasboard>} /> */}
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
+                  </Routes>
+              </Container>
+        </BudgetContextProvider>
+      {/* </UserContextProvider> */}
+    </>
   );
 }
 
